@@ -1,0 +1,5 @@
+C:/Dev/QtDualCalculator_UIv2/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/QtDualCalculator_UIv2.dir
+C:/Dev/QtDualCalculator_UIv2/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+C:/Dev/QtDualCalculator_UIv2/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Dev/QtDualCalculator_UIv2/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/QtDualCalculator_UIv2_autogen_timestamp_deps.dir
+C:/Dev/QtDualCalculator_UIv2/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug/CMakeFiles/QtDualCalculator_UIv2_autogen.dir
