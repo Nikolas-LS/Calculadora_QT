@@ -1,20 +1,20 @@
-# Calculadora Qt MVC (Básica + Científica)
+# Qt MVC Calculator (Basic + Scientific)
 
-Projeto em **Qt Widgets (C++17)** com arquitetura em **camadas (Model / Controller / Views)**.  
-Interface construída **via código C++** (sem arquivos `.ui`), **tema escuro**, **grade uniforme (5 colunas)**, **memória (MC/MR/M+)**, **tratamento de erros** e **estilização por QSS**.
+Project in **Qt Widgets (C++17)** with a **layered architecture (Model / Controller / Views)**.  
+Interface built **via C++ code** (no `.ui` files), **dark theme**, **uniform grid (5 columns)**, **memory (MC/MR/M+)**, **error handling**, and **QSS styling**.
 
 ---
 
-## 🔎 Visão geral
+## Overview
 
-- **Framework:** Qt 6 (preferível) ou Qt 5 — Qt Widgets  
+- **Framework:** Qt 6 (preferred) or Qt 5 — Qt Widgets  
 - **Build system:** CMake ≥ 3.16  
-- **Arquitetura:** Model + Controller + Views (MVC em camadas)  
-- **Plataformas:** Windows, Linux, macOS (kits Desktop)
+- **Architecture:** Model + Controller + Views (Layered MVC)  
+- **Platforms:** Windows, Linux, macOS (Desktop kits)
 
 ---
 
-## 📁 Estrutura de Pastas
+## Folder Structure
 ```plaintext
 QtDualCalculator_UIv2/
 ├─ CMakeLists.txt
@@ -34,47 +34,47 @@ QtDualCalculator_UIv2/
       ├─ ScientificCalculatorView.h
       └─ ScientificCalculatorView.cpp
 ```
-**Papel de cada pasta:**
+**Role of each folder:**
 
-- **models/** → regras de negócio e operações matemáticas (unárias e binárias) + memória.  
-- **controllers/** → interpreta cliques, controla estado/fluxo (entrada, acumulador, operador) e conversa com Model e Views.  
-- **views/** → widgets C++ que montam os **QGridLayout** (5 colunas), conectam sinais e exibem display/status/indicador de memória.  
-- **main.cpp** → inicializa a aplicação e abre a janela principal.
+- **models/** → business rules and mathematical operations (unary and binary) + memory.  
+- **controllers/** → interprets clicks, controls state/flow (input, accumulator, operator), and communicates with the Model and Views.  
+- **views/** → C++ widgets that build the **QGridLayout** (5 columns), connect signals, and display the screen/status/memory indicator.  
+- **main.cpp** → initializes the application and opens the main window.
 
 ---
 
-## 🧱 Arquitetura
+## Architecture
 
 ### Model — `CalculatorModel`
-- **Unárias:** `sin`, `cos`, `tan`, `√`, `log10`, `ln`, **`x²`**, **`%`**  
-- **Binárias:** `+`, `−`, `×`, `÷`, `x^y`  
-- **Memória:** `MC`, `MR`, `M+`  
-- **Validações/Erros:** divisão por zero; `√` de número negativo; `log/ln` com `x ≤ 0`; resultados não finitos.
+- **Unary:** `sin`, `cos`, `tan`, `√`, `log10`, `ln`, **`x²`**, **`%`**  
+- **Binary:** `+`, `−`, `×`, `÷`, `x^y`  
+- **Memory:** `MC`, `MR`, `M+`  
+- **Validations/Errors:** division by zero; `√` of a negative number; `log/ln` with `x ≤ 0`; non-finite results.
 
 ### Controller — `CalculatorController`
-- Conectado às duas views; reage ao **texto do botão** (ex.: `"7"`, `"+"`, `"x^y"`, `"sin"`, `"√"`, **`"x^2"`/`"x²"`**, **`"%"`**, `"π"`, `"e"`).  
-- Gerencia **entrada atual**, **acumulador** e **operador pendente**; executa `=` e atualiza display/indicadores.  
-- Usa `QLocale` para conversão/saída numérica.
+- Connected to both views; reacts to the **button text** (e.g., `"7"`, `"+"`, `"x^y"`, `"sin"`, `"√"`, **`"x^2"`/`"x²"`**, **`"%"`**, `"π"`, `"e"`).  
+- Manages the **current input**, **accumulator**, and **pending operator**; executes `=` and updates the display/indicators.  
+- Uses `QLocale` for numeric conversion/output.
 
-### Views — `BasicCalculatorView` e `ScientificCalculatorView`
-- Montagem **programática** com `QGridLayout` (5 colunas por linha, **sem espaços vazios**).  
-- Emitem um único sinal `buttonClicked(QString token)` por botão.  
-- Mostram **display** (alinhado à direita), **status** (mensagens de erro/info) e **indicador “M”** (memória ativa).
-
----
-
-## 🎨 Tema e estilo
-
-- **Dark theme** aplicado em `MainWindow::applyTheme()` via **Qt StyleSheet (QSS)**:
-  - Display escuro, texto claro, cantos arredondados.  
-  - **Operadores em azul**, botão **C em vermelho**, botões numéricos em cinza.  
-- Fácil de personalizar (cores, fontes, raio de borda) alterando o QSS.
+### Views — `BasicCalculatorView` and `ScientificCalculatorView`
+- **Programmatic** assembly with `QGridLayout` (5 columns per row, **no empty spaces**).  
+- Emits a single `buttonClicked(QString token)` signal per button.  
+- Shows the **display** (right-aligned), **status** (error/info messages), and **“M” indicator** (active memory).
 
 ---
 
-## 🧩 Layout dos botões (5 colunas por linha)
+## Theme and Styling
 
-**Básica**
+- **Dark theme** applied in `MainWindow::applyTheme()` via **Qt StyleSheet (QSS)**:
+  - Dark display, light text, rounded corners.  
+  - **Operators in blue**, **C button in red**, numeric buttons in gray.  
+- Easy to customize (colors, fonts, border radius) by modifying the QSS.
+
+---
+
+## Button Layout (5 columns per row)
+
+**Basic**
 ```plaintext
 MC MR M+ ± C
 7 8 9 x² ÷
@@ -83,8 +83,7 @@ MC MR M+ ± C
 0 00 . = +
 ```
 
-
-**Científica**
+**Scientific**
 ```plaintext
 MC MR M+ ± C
 sin cos tan √ log
@@ -94,38 +93,38 @@ sin cos tan √ log
 0 . = + e
 ```
 
-- **Display** ocupa **toda a largura** (mesmo comprimento do grid).  
-- **Símbolos grandes e legíveis**: **×**, **÷**, **x²**, **√**, **π**, **e**.
+- **Display** takes up the **full width** (same length as the grid).  
+- **Large and readable symbols**: **×**, **÷**, **x²**, **√**, **π**, **e**.
 
 ---
 
-## ⚙️ Funcionalidades
+## Features
 
-- Operações **básicas e científicas** (acima).  
-- **Constantes:** `π` e `e`.  
-- **Sinal:** `±` inverte o valor atual.  
-- **Decimal:** `.` (compatível com `QLocale`).  
-- **Memória:** `MC` (limpa), `MR` (recupera), `M+` (acumula).  
-- **Mensagens de erro** no status (ex.: “Divisão por zero”, “ln(x) com x≤0”).
+- **Basic and scientific** operations (above).  
+- **Constants:** `π` and `e`.  
+- **Sign:** `±` inverts the current value.  
+- **Decimal:** `.` (`QLocale` compatible).  
+- **Memory:** `MC` (clear), `MR` (recall), `M+` (accumulate).  
+- **Error messages** in the status bar (e.g., "Division by zero", "ln(x) with x≤0").
 
 ---
 
-## 🛠️ Ferramentas
+## Tools
 
 - **Qt Creator** (IDE) — Widgets  
 - **CMake** (build system)  
-- **Compiladores Desktop:** MinGW/Clang/MSVC (Windows), GCC/Clang (Linux), Clang (macOS)
+- **Desktop Compilers:** MinGW/Clang/MSVC (Windows), GCC/Clang (Linux), Clang (macOS)
 
 ---
 
-## 🚀 Como compilar e executar
+## How to Build and Run
 
-### Qt Creator (recomendado)
-1. **File → Open…** e selecione o `CMakeLists.txt`.  
-2. Escolha um **Kit Desktop** (Qt 6 preferível; Qt 5 funciona).  
-3. Configure, **Build**, e **Run**.
+### Qt Creator (recommended)
+1. **File → Open…** and select the `CMakeLists.txt`.  
+2. Choose a **Desktop Kit** (Qt 6 preferred; Qt 5 works).  
+3. Configure, **Build**, and **Run**.
 
-### Linha de comando
+### Command Line
 
 ```bash
 # Linux/macOS
@@ -134,8 +133,9 @@ cmake .. -DCMAKE_BUILD_TYPE=Release
 cmake --build . --config Release
 ./QtDualCalculator_UIv2
 
-:: Windows (PowerShell/Prompt)
+:: Windows (PowerShell/Command Prompt)
 mkdir build && cd build
 cmake .. -G "Ninja" -DCMAKE_BUILD_TYPE=Release
 cmake --build . --config Release
 .\QtDualCalculator_UIv2.exe
+```
